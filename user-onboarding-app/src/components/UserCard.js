@@ -1,11 +1,26 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const UserCard = ( {user}) => {
+
+
+const StyledCard = styled.div`
+    width: 32vw;
+    max-height: 32vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+
+`
+
+const UserCard = ( {user, customColor}) => {
+    
     return (
-        <div key={user.username} style={{border: '3px solid red'}}>
+        <StyledCard style={{background: customColor}}>
             <h2>{user.username}</h2>
             <p>{user.email}</p>
-        </div>
+        </StyledCard>
     )
 }
 

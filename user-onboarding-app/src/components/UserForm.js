@@ -2,9 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
-
+import styled from 'styled-components';
 import UserList from './UserList';
 
+const FormBox = styled.div`
+    width: 33vw;
+    background: #8EC68A;
+    margin: 0 auto 3rem auto;
+    padding: 1rem 2rem 2rem 2rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: stretch;
+    align-items: stretch;
+`;
 /*
 We want to create a form to onboard a new user to our system. 
 We need at least the following pieces of information about our new user:
@@ -49,6 +59,8 @@ const UserForm =({ values, errors, touched, status}) => {
     
     return(
         <div>
+            <FormBox>
+            <h1>Add User</h1>
             <Form>
                 <label htmlFor='username'>Username: </label>
                 <Field type='text' name='username' placeholder='name' />
@@ -72,7 +84,9 @@ const UserForm =({ values, errors, touched, status}) => {
 
                 <button type='submit'>Submit User</button>
             </Form>
+            </FormBox>
             <UserList users={users} />
+            
         </div>
     )
 };
