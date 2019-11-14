@@ -1,13 +1,11 @@
 import React from 'react';
+import UserCard from './UserCard';
 
 const UserList = (props) => {
     return (
-        <div>
+        <div style={{border: '2px solid black'}}>
             {props.users.map(user => {
-                return <div key={user.username}>
-                    <h2>{user.username}</h2>
-                    <p>{user.email}</p>
-                </div>
+                return <UserCard user={user} key={user.username}/>
             })}
         </div>
     )
