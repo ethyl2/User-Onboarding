@@ -1,7 +1,7 @@
 import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 //import axios from 'axios';
-//import * as Yup from 'yup';
+import * as Yup from 'yup';
 
 /*
 We want to create a form to onboard a new user to our system. 
@@ -21,13 +21,25 @@ const UserForm =({ values, errors, touched, status}) => {
         <div>
             <Form>
                 <label htmlFor='username'>Username: </label>
-                <Field type='text' name='username' placeholder='name' /><br />
+                <Field type='text' name='username' placeholder='name' />
+                {touched.username && errors.username && (<p>{errors.username}</p>)}
+                <br />
+
                 <label htmlFor='email'>Email: </label>
-                <Field type='email' name='email' placeholder='email' /><br />
+                <Field type='email' name='email' placeholder='email' />
+                {touched.email && errors.email && (<p>{errors.email}</p>)}
+                <br />
+
                 <label htmlFor='password'>Password: </label>
-                <Field type='password' name='password' placeholder='password' /><br />
+                <Field type='password' name='password' placeholder='password' />
+                {touched.password && errors.password && (<p>{errors.password}</p>)}
+                <br />
+
                 <label htmlFor='tos'>Accept Terms of Service </label>
-                <Field type='checkbox' name='tos' checked={values.tos} /><br />
+                <Field type='checkbox' name='tos' checked={values.tos} />
+                {touched.tos&& errors.tos && (<p>{errors.tos}</p>)}
+                <br />
+
                 <button type='submit'>Submit User</button>
             </Form>
         </div>
@@ -42,7 +54,23 @@ const FormikUserForm = withFormik({
           password: password || '',
           tos: tos || false
         };
-      }
+      },
+      /*Using Yup, set up at least two different validations for each field 
+      along with custom error codes that will display on screen when validation 
+      fails. */
+      validationSchema: Yup.object().shape({
+          username: Yup.string().min(2, 'Username is too short')
+            .max(50, 'Username is too long')
+            .required('Username is required here'),
+          email: Yup.string()
+            .email('Invalid email')
+            .required('Email is required here'),
+          password: Yup.string()
+            .min(6, 'Password is too short')
+            .max(50, 'Password is too long')
+            .required('Password is required here'),
+          tos: Yup.bool().oneOf([true], 'You must agree to the Terms of Service to continue')
+      })
 })(UserForm);
 
 export default FormikUserForm;
