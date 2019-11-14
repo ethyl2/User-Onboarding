@@ -3,7 +3,7 @@ import { withFormik, Form, Field } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
 
-import UserList from './components/UserList';
+import UserList from './UserList';
 
 /*
 We want to create a form to onboard a new user to our system. 
@@ -29,6 +29,23 @@ const UserForm =({ values, errors, touched, status}) => {
         status && setUsers(users => [...users, status]);
     }, [status]);
     
+    /*
+    Stretch: Add to your existing handling so that,
+     if a user inputs their email as waffle@syrup.com, 
+     they receive an error message in their form that says 
+     "That email is already taken." */
+     
+    function validateEmail(value) {
+        let error;
+        if (!value) {
+          error = 'Required';
+        } else if (value === 'waffle@syrup.com') {
+            error = 'That email is already taken';
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+          error = 'Invalid email address';
+        }
+        return error;
+      }
     
     return(
         <div>
@@ -39,12 +56,12 @@ const UserForm =({ values, errors, touched, status}) => {
                 <br />
 
                 <label htmlFor='email'>Email: </label>
-                <Field type='email' name='email' placeholder='email' />
+                <Field type='email' name='email' placeholder='email' validate={validateEmail}  />
                 {touched.email && errors.email && (<p>{errors.email}</p>)}
                 <br />
 
                 <label htmlFor='password'>Password: </label>
-                <Field type='password' name='password' placeholder='password' />
+                <Field type='password' name='password' placeholder='password'/>
                 {touched.password && errors.password && (<p>{errors.password}</p>)}
                 <br />
 
