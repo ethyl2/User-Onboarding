@@ -1,6 +1,6 @@
 import React from 'react';
 import { withFormik, Form, Field } from 'formik';
-//import axios from 'axios';
+import axios from 'axios';
 import * as Yup from 'yup';
 
 /*
@@ -54,23 +54,38 @@ const FormikUserForm = withFormik({
           password: password || '',
           tos: tos || false
         };
-      },
-      /*Using Yup, set up at least two different validations for each field 
-      along with custom error codes that will display on screen when validation 
-      fails. */
-      validationSchema: Yup.object().shape({
-          username: Yup.string().min(2, 'Username is too short')
-            .max(50, 'Username is too long')
-            .required('Username is required here'),
-          email: Yup.string()
-            .email('Invalid email')
-            .required('Email is required here'),
-          password: Yup.string()
-            .min(6, 'Password is too short')
-            .max(50, 'Password is too long')
-            .required('Password is required here'),
-          tos: Yup.bool().oneOf([true], 'You must agree to the Terms of Service to continue')
-      })
+    },
+    /*Using Yup, set up at least two different validations for each field 
+    along with custom error codes that will display on screen when validation 
+    fails. */
+    validationSchema: Yup.object().shape({
+        username: Yup.string().min(2, 'Username is too short')
+        .max(50, 'Username is too long')
+        .required('Username is required here'),
+        email: Yup.string()
+        .email('Invalid email')
+        .required('Email is required here'),
+        password: Yup.string()
+        .min(6, 'Password is too short')
+        .max(50, 'Password is too long')
+        .required('Password is required here'),
+        tos: Yup.bool().oneOf([true], 'You must agree to the Terms of Service to continue')
+    }),
+
+    /* 
+    Craft a POST request using axios that sends your form data to the 
+    following endpoint: https://reqres.in/api/users
+    Verify using a console.log() that you are receiving a successful 
+    response back
+    */
+       
+    handleSubmit(values) {
+           axios.post('https://reqres.in/api/users', values)
+           .then(res => {
+               console.log(res);
+           })
+           .catch(err => console.log(err.response));
+       }
 })(UserForm);
 
 export default FormikUserForm;
