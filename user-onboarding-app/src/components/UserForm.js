@@ -57,6 +57,9 @@ const UserForm =({ values, errors, touched, status}) => {
         return error;
       }
     
+    /* Implement a dropdown menu in your Formik form. Add a role value to your 
+    Formik HOC and add a dropdown with different roles for your users.
+    */
     return(
         <div>
             <FormBox>
@@ -77,6 +80,27 @@ const UserForm =({ values, errors, touched, status}) => {
                 {touched.password && errors.password && (<p>{errors.password}</p>)}
                 <br />
 
+                <label htmlFor='role'>Role: </label>
+                <Field as='select' name='role'>
+                    <option disabled value=''>Select your role:</option>
+                    <option value='Executive Chef'>Executive Chef</option>
+                    <option value='Sous Chef'>Sous-Chef de cuisine</option>
+                    <option value='Pastry Chef'>Pastry Chef</option> 
+                    <option value='Food Critic'>Food Critic</option>
+                    <option value='Food Blogger'>Food Blogger</option>              
+                    <option value='Food Photographer'>Food Photographer</option>
+                    <option value='Foodie'>Foodie</option>
+                    <option value='Health Inspector'>Health Inspector</option>
+                    <option value='Regular Customer'>Regular Customer</option>
+                    <option value='First-Time Customer'>First-Time Customer</option>
+                    <option value='Supplier'>Supplier</option>
+                    <option value='Manager'>Manager</option>
+                    <option value='Line Cook'>Line Cook</option>
+                    <option value='Server'>Server</option>
+                    <option value='Host/Hostess'>Host/Hostess</option>
+                    <option value='Other'>Other</option>
+                </Field><br />
+
                 <label htmlFor='tos'>Accept Terms of Service </label>
                 <Field type='checkbox' name='tos' checked={values.tos} />
                 {touched.tos&& errors.tos && (<p>{errors.tos}</p>)}
@@ -92,12 +116,13 @@ const UserForm =({ values, errors, touched, status}) => {
 };
 
 const FormikUserForm = withFormik({
-    mapPropsToValues({ username, email, password, tos }) {
+    mapPropsToValues({ username, email, password, role, tos }) {
         return {
           username: username || '',
           email: email || '',
           password: password || '',
-          tos: tos || false
+          tos: tos || false,
+          role: role || ''
         };
     },
     /*Using Yup, set up at least two different validations for each field 

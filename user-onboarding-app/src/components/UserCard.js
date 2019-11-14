@@ -11,14 +11,15 @@ const StyledCard = styled.div`
     align-items: center;
     margin-bottom: 1rem;
     border-radius: 4px;
-
+    padding: 1rem;
 `
 
-const UserCard = ( {user, customColor}) => {
-    
+const UserCard = ({ user, customColor }) => {
+
     return (
-        <StyledCard style={{background: customColor}}>
+        <StyledCard style={{ background: customColor }}>
             <h2>{user.username}</h2>
+            <h3>{user.role}</h3>
             <p>{user.email}</p>
         </StyledCard>
     )
