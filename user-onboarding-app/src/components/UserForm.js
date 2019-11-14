@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
@@ -16,6 +16,17 @@ We need at least the following pieces of information about our new user:
 */
 
 const UserForm =({ values, errors, touched, status}) => {
+
+    //Set up a state property called users that is initialized with an empty array
+    const [users, setUsers] = useState([]);
+
+    /*
+    Every time you make a POST request, and get that new user data back, 
+    update your user's state with the new user added to the array */
+    useEffect(() => {
+        status && setUsers(users => [...users, status]);
+    }, [status]);
+    
     
     return(
         <div>
@@ -42,6 +53,12 @@ const UserForm =({ values, errors, touched, status}) => {
 
                 <button type='submit'>Submit User</button>
             </Form>
+            {users.map(user => {
+                return <div key={user.username}>
+                    <h2>{user.username}</h2>
+                    <p>{user.email}</p>
+                </div>
+            })}
         </div>
     )
 };
@@ -79,10 +96,11 @@ const FormikUserForm = withFormik({
     response back
     */
        
-    handleSubmit(values) {
+    handleSubmit(values, { setStatus }) {
            axios.post('https://reqres.in/api/users', values)
            .then(res => {
                console.log(res);
+               setStatus(res.data);
            })
            .catch(err => console.log(err.response));
        }
