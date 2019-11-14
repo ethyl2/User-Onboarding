@@ -3,6 +3,8 @@ import { withFormik, Form, Field } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
 
+import UserList from './components/UserList';
+
 /*
 We want to create a form to onboard a new user to our system. 
 We need at least the following pieces of information about our new user:
@@ -53,12 +55,7 @@ const UserForm =({ values, errors, touched, status}) => {
 
                 <button type='submit'>Submit User</button>
             </Form>
-            {users.map(user => {
-                return <div key={user.username}>
-                    <h2>{user.username}</h2>
-                    <p>{user.email}</p>
-                </div>
-            })}
+            <UserList users={users} />
         </div>
     )
 };
