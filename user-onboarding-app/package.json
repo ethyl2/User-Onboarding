@@ -2,7 +2,6 @@
   "name": "user-onboarding-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ethyl.github.io/User-Onboarding/",
   "dependencies": {
     "axios": "^0.19.0",
     "formik": "^2.0.4",
@@ -18,8 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "npm run build && mv build/index.html build/200.html && surge build"
   },
   "eslintConfig": {
     "extends": "react-app"
