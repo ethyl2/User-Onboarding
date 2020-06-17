@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/User-Onboarding/static/css/main.1bd7183c.chunk.css",
+    "main.js": "/User-Onboarding/static/js/main.817746bd.chunk.js",
+    "main.js.map": "/User-Onboarding/static/js/main.817746bd.chunk.js.map",
+    "runtime-main.js": "/User-Onboarding/static/js/runtime-main.9d3fb000.js",
+    "runtime-main.js.map": "/User-Onboarding/static/js/runtime-main.9d3fb000.js.map",
+    "static/js/2.0bf2daae.chunk.js": "/User-Onboarding/static/js/2.0bf2daae.chunk.js",
+    "static/js/2.0bf2daae.chunk.js.map": "/User-Onboarding/static/js/2.0bf2daae.chunk.js.map",
+    "index.html": "/User-Onboarding/index.html",
+    "precache-manifest.e1d4358f422c7a3ba26d677857c48426.js": "/User-Onboarding/precache-manifest.e1d4358f422c7a3ba26d677857c48426.js",
+    "service-worker.js": "/User-Onboarding/service-worker.js",
+    "static/css/main.1bd7183c.chunk.css.map": "/User-Onboarding/static/css/main.1bd7183c.chunk.css.map",
+    "static/media/App.css": "/User-Onboarding/static/media/citrus.13eb9a07.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9d3fb000.js",
+    "static/js/2.0bf2daae.chunk.js",
+    "static/css/main.1bd7183c.chunk.css",
+    "static/js/main.817746bd.chunk.js"
+  ]
+}
